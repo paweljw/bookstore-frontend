@@ -22,12 +22,18 @@ export default {
       error: false
     }
   },
+  created () {
+    this.checkCurrentLogin()
+  },
   updated () {
-    if (localStorage.token) {
-      this.$router.replace(this.$route.query.redirect || '/authors')
-    }
+    this.checkCurrentLogin()
   },
   methods: {
+    checkCurrentLogin () {
+      if (localStorage.token) {
+        this.$router.replace(this.$route.query.redirect || '/authors')
+      }
+    },
     login () {
       this.$http.post('/auth', { user: this.email, password: this.password })
         .then(request => this.loginSuccessful(request))
