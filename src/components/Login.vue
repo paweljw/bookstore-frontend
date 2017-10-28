@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -24,6 +26,9 @@ export default {
       error: false
     }
   },
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
   created () {
     this.checkCurrentLogin()
   },
@@ -32,7 +37,7 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (localStorage.token) {
+      if (this.currentUser) {
         this.$router.replace(this.$route.query.redirect || '/authors')
       }
     },
@@ -48,10 +53,12 @@ export default {
       }
       this.error = false
       localStorage.token = req.data.token
+      this.$store.dispatch('login')
       this.$router.replace(this.$route.query.redirect || '/authors')
     },
     loginFailed () {
       this.error = 'Login failed!'
+      this.$store.dispatch('logout')
       delete localStorage.token
     }
   }
@@ -72,6 +79,12 @@ export default {
   background: #fff;
   width: 70%;
   margin: 12% auto;
+  animation: fadein 0.6s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .form-signin {
