@@ -43,4 +43,7 @@ export default {
 </script>
 
 <style>
+.container-fluid {
+  padding-top: 20px;
+}
 </style>

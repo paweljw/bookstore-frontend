@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Hello from '@/components/Hello'
 import Logout from '@/components/Logout'
+import AuthorsList from '@/components/Authors/List'
+import SingleAuthor from '@/components/Authors/Single'
 
 Vue.use(Router)
 
@@ -17,7 +18,12 @@ export default new Router({
     {
       path: '/authors',
       name: 'Authors',
-      component: Hello
+      component: AuthorsList
+    },
+    {
+      path: '/authors/:id',
+      name: 'Author',
+      component: SingleAuthor
     },
     {
       path: '/logout',
