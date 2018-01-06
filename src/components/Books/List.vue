@@ -7,13 +7,18 @@
       <h1>Books by {{ author.name }}</h1>
     </div>
     <div class="row">
-      <Box v-for="book in books" :author="author" :book="book" :key="book.id" v-show="searchMatch(book.title)"></Box>
+      <div class="row col">
+        <Box v-for="book in books" :author="author" :book="book" :key="book.id"
+          v-show="searchMatch(book.title)" v-on:click.native="setBook(book)"></Box>
+      </div>
+      <Full :book="currentBook" v-if="currentBook" v-on:close="closeBook"></Full>
     </div>
   </div>
 </template>
 
 <script>
 import Box from './Box'
+import Full from './Full'
 
 export default {
   name: 'List',
@@ -21,7 +26,8 @@ export default {
   data () {
     return {
       search: '',
-      books: []
+      books: [],
+      currentBook: null
     }
   },
   created () {
@@ -32,6 +38,12 @@ export default {
   methods: {
     searchMatch (bookTitle) {
       return bookTitle.toLowerCase().match(this.searchRegExp)
+    },
+    setBook (book) {
+      this.currentBook = book
+    },
+    closeBook () {
+      this.currentBook = null
     }
   },
   computed: {
@@ -40,7 +52,8 @@ export default {
     }
   },
   components: {
-    Box
+    Box,
+    Full
   }
 }
 </script>
