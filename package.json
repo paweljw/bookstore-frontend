@@ -10,7 +10,9 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "deploy": "node node_modules/s3-deploy/.bin/s3-deploy './dist/**' --cwd './dist/' --region eu-west-1 --bucket bookstore-frontend-paweljw --profile bookstore-frontend",
+    "release": "npm run build && npm run deploy"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -68,6 +70,7 @@
     "ora": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.0",
+    "s3-deploy": "^0.10.0",
     "sass-loader": "^6.0.6",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
