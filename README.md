@@ -1,6 +1,8 @@
 # bookstore-frontend
 
-> Frontend for https://github.com/paweljw/bookstore-backend app, built for a series of articles [on my blog](https://paweljw.github.io/tags/#vue-frontend-series-list).
+⚠️ This repository is no longer maintained, and remains here for reference purposes.
+
+Frontend for https://github.com/paweljw/bookstore-backend app, built for a series of articles [on my blog](https://paweljw.github.io/tags/#vue-frontend-series-list).
 
 ## Build Setup
 
